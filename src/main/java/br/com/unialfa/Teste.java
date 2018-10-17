@@ -10,8 +10,8 @@ import br.com.unialfa.model.entity.Endereco;
 
 public class Teste {
 	public static void main(String[] args) throws SQLException {
-		Assalariado funcionario1 = new Assalariado("João da Silva", 3000.00);
-		Endereco endereco = new Endereco("Rua de São João", 35, "Jd. das Flores", "Goiânia");
+		Assalariado funcionario1 = new Assalariado("Joï¿½o da Silva", 3000.00);
+		Endereco endereco = new Endereco("Rua de Sï¿½o Joï¿½o", 35, "Jd. das Flores", "Goiï¿½nia");
 		funcionario1.setEndereco(endereco);
 		Connection conn = new ConnectionFactory().getConnection();
 		conn.setAutoCommit(false);
@@ -45,7 +45,7 @@ public class Teste {
 		rows = stmt.executeUpdate();
 		conn.commit();
 		stmt.close();
-		System.out.println("Conexão aberta!");
+		System.out.println("Conexï¿½o aberta!");
 		conn.close();
 	}
 }
