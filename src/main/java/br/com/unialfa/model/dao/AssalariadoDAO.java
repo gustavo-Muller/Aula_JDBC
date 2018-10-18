@@ -73,14 +73,35 @@ public class AssalariadoDAO implements DAOInterface<Assalariado> {
 
 	}
 
-	public void deletarById(Integer id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public Assalariado consultaById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deletarById(Integer id) throws SQLException {	
+		PreparedStatement stmt = null;
+		Connection conn = ConnectionFactory.getConnection();
+		Assalariado assalariado = new Assalariado();
+		Endereco endereco = new Endereco();
+		
+		try {
+		String sql = "Select assalariado.codigo, assalariado.nome, assalariado.salario_mensal, "
+				+ "endereco.id, endereco.rua, endereco.numero, endereco.bairro, endereco.cidade "
+				+ "FROM assalariado join endereco on assalariado.codigo = endereco.assalariado_codigo "
+				+ "WHERE assalariado.codigo = ?";
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, id);
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs.next()) {
+			assalariado.setCodigo(rs.getInt("codigo"));
+			assalariado.setNome(rs.getString("nome"));
+			assalariado.setSalarioMensal(rs.getDouble("salario_mensal"));
+			endereco.setBairro(rs.getString("bairro"));
+			endereco.setCidade(rs.getString("rua"));
+			endereco.setRua(rs.getString("numero"));
+			assalariado.setEndereco(endereco);
+		} 
+		stmt.close();
+		conn.close();
+		} catch (Exception e) {
+			e.getMessage();
+		}
 	}
 
 	public List<Assalariado> consultarAll() {
