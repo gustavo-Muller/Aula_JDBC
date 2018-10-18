@@ -56,7 +56,20 @@ public class AssalariadoDAO implements DAOInterface<Assalariado> {
 	}
 
 	public void atualizar(Assalariado obj) {
-		// TODO Auto-generated method stub
+		Connection conn = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		String sql = "UPDATE assalariado SET nome = ?, "
+				+ "salario_mensal = ? WHERE codigo = ?";
+		String sql2 = "UPDATE endereco SET rua = ?, numero = ?, "
+				+ "bairro = ?, cidade = ? WHERE assalariado_id = ?";
+		try {
+			conn.setAutoCommit(false);
+			stmt = conn.prepareStatement(sql);
+			
+		}catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 
 	}
 
